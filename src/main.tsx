@@ -1,4 +1,3 @@
-import './index.css'
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { Root, Slot } from 'waku/client'
@@ -11,8 +10,8 @@ const rootElement = (
   </StrictMode>
 )
 
-if ((globalThis as any).__WAKU_SSR_ENABLED__) {
-  hydrateRoot(document.getElementById('root')!, rootElement)
+if (import.meta.env.WAKU_HYDRATE) {
+  hydrateRoot(document.body, rootElement)
 } else {
-  createRoot(document.getElementById('root')!).render(rootElement)
+  createRoot(document.body).render(rootElement)
 }
